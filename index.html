@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery-2.1.0.js">
+			
+		</script>
+		<style type="text/css">
+			.btn{
+				background-color: olivedrab;
+				opacity: 0.7;
+				border-radius: 4px;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="ceshi" action="">
+			<fieldset id="">
+				 <label ><input type="checkbox" name="all" id="all" value="" /><span class="btn" id="xuzeall">
+				 	全选	 </span><span class="btn" id="xuzenone">
+				 	全不选
+				
+				 </span>
+				 <br />
+			
+				 <label ><input type="checkbox" name="num" id="" value="" />1</label><br />
+				 <label ><input type="checkbox" name="num" id="" value="" />2</label><br />
+				 <label ><input type="checkbox" name="num" id="" value="" />3</label><br />
+				 <label ><input type="checkbox" name="num" id="" value="" />4</label><br />
+				 <label><input type="checkbox" name="num" id="" value="" />5</label><br />
+				 </label> <label ><input type="button" name="" class="btn" id="fan" value="反选" /></label>
+			</fieldset>
+			<script type="text/javascript">
+				$('#xuzenone').hide()
+				$('#all').hide()
+				$('#ceshi').filter(':checkbox').prop('checked',false) //使所有都不被选中
+				$('#all').change(function(){
+					if($(this).prop('checked')){
+						$('[name=num]').prop('checked',true)
+						$('#xuzeall').hide()
+						$('#xuzenone').show()
+					}else{
+						$('[name=num]').prop('checked',false)
+						$('#xuzeall').show()
+						$('#xuzenone').hide()
+					}
+				})
+				// 全选时自动变为全不选
+			
+				$('[name=num]').change(function(){
+					var a=0
+					$('[name=num]').filter(function(){
+						if($(this).prop('checked')){
+							a++
+						}
+					})
+					console.log(a)
+					if(a==5){
+						$('#all').prop('checked',true)
+						$('#all').change()
+					}else if(a==0){
+						$('#all').prop('checked',false)
+						$('#all').change()
+					}
+				})
+				$('#fan').on("click",function(){
+					$('[name=num]').map(
+						function(){
+							if($(this).prop('checked')){
+								$(this).prop('checked',false)
+							}else{
+								$(this).prop('checked',true)
+							}
+						}
+					)
+					$('[name=num]').change()
+				})
+			</script>
+			
+		</form>
+	</body>
+</html>
